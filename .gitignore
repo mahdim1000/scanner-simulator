@@ -1,0 +1,51 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+frontend/node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+backend/.idea
+backend/build
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Frontend
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+frontend/.env
+frontend/.next/        # For Next.js (if applicable)
+frontend/.cache/       # For Gatsby.js (if applicable)
+frontend/npm-debug.log*
+
+# Backend
+backend/.mvn
+backend/node_modules/
+backend/logs/
+backend/*.log
+backend/tmp/
+backend.env/
+backend/.env
+backend/.venv/         # For Python (if applicable)
+backend/.idea/         # For IDE-specific files
+backend/__pycache__/   # For Python bytecode files
+backend/target/           # For Java builds (if applicable)
+backend/db.sqlite3     # For SQLite databases
+backend/*.db
