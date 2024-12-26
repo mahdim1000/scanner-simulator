@@ -1,6 +1,6 @@
 package com.github.mahdim1000.backend.service;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import java.io.PrintWriter;
@@ -9,25 +9,25 @@ import java.io.IOException;
 
 @Component
 public class TCPSocketManager {
-    @Value("${tcp.server.host}")
-    private String SERVER_HOST;
-    @Value("${tcp.server.port}")
-    private int SERVER_PORT;
+    private final String serverHost;
+    private final Integer serverPort;
 
     private Socket socket;
     private PrintWriter writer;
     private boolean isConnected = false;
 
-    public TCPSocketManager() {
+    public TCPSocketManager(ApplicationContext context) {
+        serverHost = context.getEnvironment().getProperty("tcp.server.host");
+        serverPort = Integer.parseInt(context.getEnvironment().getProperty("tcp.server.port"));
         System.out.println("trying to connect to server...");
-        System.out.println("server host: " + SERVER_HOST);
-        System.out.println("server port: " + SERVER_PORT);
+        System.out.println("server host: " + serverHost);
+        System.out.println("server port: " + serverPort);
         connect();
     }
 
     private void connect() {
         try {
-            socket = new Socket(SERVER_HOST, SERVER_PORT);
+            socket = new Socket(serverHost, serverPort);
             writer = new PrintWriter(socket.getOutputStream(), true);
             isConnected = true;
         } catch (IOException e) {
