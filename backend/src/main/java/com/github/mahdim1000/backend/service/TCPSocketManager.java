@@ -19,6 +19,9 @@ public class TCPSocketManager {
     private boolean isConnected = false;
 
     public TCPSocketManager() {
+        System.out.println("trying to connect to server...");
+        System.out.println("server host: " + SERVER_HOST);
+        System.out.println("server port: " + SERVER_PORT);
         connect();
     }
 
