@@ -7,6 +7,7 @@ import {TopBar} from "./component/TopBar.jsx";
 import {QRScanner} from "./component/QRScanner.jsx";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import CodePage from "./page/Codes.jsx";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/qr-scanner" element={<QRScanner />} />
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/create" element={<CreateScannerPage />} />
+                <Route path="/code" element={<CodePage />} />
             </Routes>
             <ToastContainer />
         </BrowserRouter>

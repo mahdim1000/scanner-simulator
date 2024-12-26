@@ -33,6 +33,9 @@ export const TopBar = () => {
                         <div onClick={() => handleOptionClick('/settings')}>
                             Settings
                         </div>
+                        <div onClick={() => handleOptionClick('/code')}>
+                            code
+                        </div>
                     </div>
                 )}
             </div>
