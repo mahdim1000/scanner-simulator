@@ -17,6 +17,7 @@ public class QRController {
     @PostMapping
     public ResponseEntity<Void> sendQRCode(@RequestParam String macAddress,
                                            @RequestParam String qrCode) {
+        System.out.println("recived message from scanner: " + macAddress + ", " + qrCode);
         String message = macAddress + "#" + qrCode;
         socketManager.sendMessage(message);
         return ResponseEntity.ok().build();
