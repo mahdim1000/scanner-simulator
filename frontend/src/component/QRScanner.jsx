@@ -10,7 +10,7 @@ export const QRScanner = () => {
     const scanner = location.state?.scanner;
 
     useEffect(() => {
-        const scanner = new Html5QrcodeScanner('reader', {
+        const qrScanner = new Html5QrcodeScanner('reader', {
             qrbox: {
                 width: 250,
                 height: 250,
@@ -19,7 +19,7 @@ export const QRScanner = () => {
             facingMode: { exact: "environment" },
         });
 
-        scanner.render(success, error);
+        qrScanner.render(success, error);
 
         function success(result) {
             const currentTime = Date.now();
@@ -27,11 +27,14 @@ export const QRScanner = () => {
                 lastScanTime.current = currentTime;
                 QRApi.send(scanner.macAddress, result).then(response => {
                     if (response.ok) {
+                        console.log('QR code scanned successfully:', scanner.name);
+                        console.log('QR code scanned successfully:', scanner.macAddress);
                         toast.success('Scan complete!', {
                             position: "top-center",
                             autoClose: 2000,
                             hideProgressBar: true,
-                        });                    } else {
+                        });
+                    } else {
                         console.error('Failed to scan QR code');
                     }
                 });
@@ -45,9 +48,9 @@ export const QRScanner = () => {
         }
 
         return () => {
-            scanner.clear().catch(error => console.error(error));
+            qrScanner.clear().catch(error => console.error(error));
         };
-    }, []);
+    }, [scanner]); // Added scanner to dependency array
 
     return (
         <div className="container mx-auto p-4">
