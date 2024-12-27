@@ -2,6 +2,7 @@ import { Html5QrcodeScanner } from 'html5-qrcode';
 import { useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 import { useLocation } from 'react-router-dom';
+import {scannerApi as QRApi} from "../api/QRApi.js";
 
 export const QRScanner = () => {
     const lastScanTime = useRef(0);
@@ -24,10 +25,15 @@ export const QRScanner = () => {
             const currentTime = Date.now();
             if (currentTime - lastScanTime.current >= 1000) {
                 lastScanTime.current = currentTime;
-                toast.success('Scan complete!', {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: true,
+                QRApi.send(scanner.macAddress, result).then(response => {
+                    if (response.ok) {
+                        toast.success('Scan complete!', {
+                            position: "top-center",
+                            autoClose: 2000,
+                            hideProgressBar: true,
+                        });                    } else {
+                        console.error('Failed to scan QR code');
+                    }
                 });
                 console.log('Scanner Info:', scanner);
                 console.log('Scan Result:', result);
