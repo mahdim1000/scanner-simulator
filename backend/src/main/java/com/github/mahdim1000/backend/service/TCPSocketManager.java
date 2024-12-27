@@ -57,9 +57,15 @@ public class TCPSocketManager {
     }
 
     public void sendMessage(String message) {
+        System.out.println("message sent: " + message);
         if (isConnected && writer != null) {
-            System.out.println("message sent: " + message);
+            handleReconnection();
+        }
+        try {
             writer.println(message);
+        } catch (Exception e) {
+            System.out.println("exception occurred while sending message: " + e.getMessage());
+            handleReconnection();
         }
     }
 }
